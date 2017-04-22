@@ -1,12 +1,45 @@
-	.file	1 "sortc.c" 
-	.section .mdebug.abi32
-	.previous
-	.gnu_attribute 4, 1
-	.globl	v #Torna o label v como visivel para todos os programas parciais ligados com este.
-	.data
-	.align	2
-	.type	v, @object
-	.size	v, 40
+# .file
+# .section
+# .mdebug
+# .previous
+# .nan
+# .gnu_attribute
+# .globl Torna o label v como visivel para todos os programas parciais ligados com este.
+# .data
+# .align
+# .type
+# .size Indica o tamanho em bytes do label v.
+# .word
+# .rdata
+# .ascii
+# .text
+# .ent
+# .frame
+# .mask
+# .fmask
+# .set
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.file	1 "sortc.c"     
+	.section .mdebug.abi32  
+	.previous               
+	.gnu_attribute 4, 1     
+	.globl	v 				
+	.data                   
+	.align	2                
+	.type	v, @object       
+	.size	v, 40           # Indica o tamanho em bytes do label v.
 v:
 	.word	5
 	.word	8
@@ -19,7 +52,7 @@ v:
 	.word	1
 	.word	9
 	.rdata
-	.align	2
+	.align	2	
 .LC0:
 	.ascii	"%d\011\000"
 	.text
