@@ -4,15 +4,15 @@
 	# .previous
 	# .nan
 	# .gnu_attribute
-	# .globl Torna o label v como visivel para todos os programas parciais ligados com este.
-	# .data
+	# .globl	Torna o label v como visivel para todos os programas parciais ligados com este.
+	# .data  	É usado para separar as declarações de variáveis
 	# .align
 	# .type
-	# .size Indica o tamanho em bytes do label v.
-	# .word
+	# .size		Indica o tamanho em bytes do label v.
+	# .word  	É usado para alocar e inicializar espaço para as variáveis
 	# .rdata
-	# .ascii
-	# .text
+	# .ascii  	Monta cada string passada em endereços consecutivos, sem a quebra automatica de fim de linha.
+	# .text   	Mostra para o montador que os 'textos' apos o .text são instruções de linguagem
 	# .ent
 	# .frame
 	# .mask
@@ -23,12 +23,12 @@
 		.previous
 		.gnu_attribute 4, 1
 		.globl	v #Torna o label v como visivel para todos os programas parciais ligados com este.
-		.data
+		.data	  #É usado para separar as declarações de variáveis	
 		.align	2
 		.type	v, @object
 		.size	v, 40
 	v:
-		.word	5
+		.word	5   #É usado para alocar e inicializar espaço para as variáveis
 		.word	8
 		.word	3
 		.word	4
@@ -41,8 +41,8 @@
 		.rdata
 		.align	2
 	.LC0:
-		.ascii	"%d\011\000"
-		.text
+		.ascii	"%d\011\000"  #Monta cada string passada em endereços consecutivos, sem a quebra automatica de fim de linha.
+		.text				  #Mostra para o montador que os 'textos' apos o .text são instruções de linguagem 
 		.align	2
 		.globl	show
 		.set	nomips16
