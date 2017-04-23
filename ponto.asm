@@ -1,6 +1,5 @@
 .text
 
-	addi $s0, $zero, 0xff000000   #endereço inicial mmio
 	addi $a0, $zero, 20	#x
 	addi $a1, $zero, 20	#y
 	addi $a2, $zero, 0xc0   #cor
@@ -12,6 +11,7 @@
 	jal reta
 	li $v0, 10
 	syscall
+
 # Função reta recebe:
 # $s0 endereço de memória do bitmap
 # $a0 coordenada x do primeiro ponto
@@ -58,17 +58,15 @@ return:
 # $a0 coordenada x do pixel a ser colorido
 # $a1 coordenada y do pixel a ser colorido
 # $a2 cor do pixel a ser colorido
-# TODO Salvar os valores anteriores dos registradores na pilha?
-	
+# Salvar os valores anteriores dos registradores na pilha?
+# Seguindo a convencao utilizada os valores $t e $a nao sao
+# permantentes, logo nao precisa usar a pilha
+
 ponto:
-	addi $sp, $sp, -8
-	sw   $t0 4($sp)
-	sw   $t1 0($sp)
+	addiu $t0, $zero, 0xff000000 #endereco inicial mmio
 	mul $t1,$a1, 320  #y * 320
-	add $t1, $t1, $a0 # y * 320 + x
-	add $t0, $s0, $t1
+	addu $t1, $t1, $a0 # y * 320 + x
+	addu $t0, $t0, $t1 #0xff000000 + 320 * y + x
 	sb $a2, 0($t0) #desenha
-	lw $t0  4($sp)
-	lw $t1  0($sp)
 	jr $ra
 	
