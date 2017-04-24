@@ -8,6 +8,15 @@
 	jal ponto
 	li $v0, 10
 	syscall
+
+
+# Função ponto recebe:
+# $s0 endereço de memória do bitmap
+# $a0 coordenada x do pixel a ser colorido
+# $a1 coordenada y do pixel a ser colorido
+# $a2 cor do pixel a ser colorido
+# TODO Salvar os valores anteriores dos registradores na pilha?
+
 ponto:
 	
 	mul $t1,$a1, 320  #y * 320
