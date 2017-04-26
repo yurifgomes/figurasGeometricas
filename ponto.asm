@@ -7,8 +7,8 @@
 	
 	jal ponto
 	
-	addi $t8, $zero, 40
-	addi $t9, $zero, 40
+	addi $t8, $zero, 23
+	addi $t9, $zero, 23
 	jal reta
 	li $v0, 10
 	syscall
@@ -28,21 +28,27 @@ reta:
 	mtc1 $t1,$f1 # f1 será o valor de delta y
 	mtc1 $a1,$f3 # f3 será o valor de b
 	div.s $f2, $f1,$f0 # f2 = inclinação na reta
-	and $t2, $zero, $zero #t2 = 0, t2 é o contador 
+	and $t2, $zero, $zero #t2 = 0, t2 é o contador
+	addi $sp, $sp, -4 # aloca 1 word na pilha
+	sw $ra, 0($sp)    #salva o ra
 	jal loop_reta
+	move $ra,$sp   # volta pro ra anterior
+	addi $sp, $sp,4 #desaloca
+	jr $ra
 loop_reta:
-	beq $t2,$t8,return
+	beq $t2,$t8, return
 	mtc1 $t2, $f5 # f5 vai ser auxiliar para multiplica a * x
 	mul.s $f4, $f2, $f5 # f4 = a*x
 	add.s $f6, $f4, $f3 # f6 = a*x + b
 	round.w.s $f7,$f6 # arredonde o valor
 	mfc1 $a1,$f7 # a1 é o Y = ax + b
 	move $a0,$t2 # a0 é x
-	addi $sp, $sp, -4
-	sw $ra, 0($sp)
-	jal ponto
-	move $ra,$sp
-	addi $sp,$sp, 4
+	addi $sp, $sp, -4 # aloca 1 word na pilha
+	sw $ra, 0($sp)    #salva o ra
+	jal ponto         # desenha
+	move $ra,$sp      # volta pro ra anterior
+	addi $sp,$sp, 4 #desaloca
+	addi $t2, $t2, 1 # t2++
 	j loop_reta
  		
 return:
@@ -61,7 +67,7 @@ ponto:
 	mul $t1,$a1, 320  #y * 320
 	add $t1, $t1, $a0 # y * 320 + x
 	add $t0, $s0, $t1
-	sb $a2, 0($t0)
+	sb $a2, 0($t0) #desenha
 	lw $t0  4($sp)
 	lw $t1  0($sp)
 	jr $ra
