@@ -18,14 +18,12 @@
 	addi $a2, $zero, 30	#x1
 	addi $a3, $zero, 40	#y1
 	jal reta2
-	
 	addi $t0, $zero, 0xc0   #cor
 	addi $a0, $zero, 40	#x0
 	addi $a1, $zero, 40	#y0
 	addi $a2, $zero, 40	#x1
 	addi $a3, $zero, 30	#y1
 	jal reta2
-	
 	addi $t0, $zero, 0x07   #cor
 	addi $a0, $zero, 160	#x0
 	addi $a1, $zero, 0	#y0
@@ -37,6 +35,12 @@
 	addi $a1, $zero, 239	#y0
 	addi $a2, $zero, 319	#x1
 	addi $a3, $zero, 230	#y1
+	jal reta2
+	addi $t0, $zero, 0x00   #cor
+	addi $a0, $zero, 200	#x0
+	addi $a1, $zero, 0	#y0
+	addi $a2, $zero, 3	#x1
+	addi $a3, $zero, 0	#y1
 	jal reta2
 	
 	li $v0, 10
